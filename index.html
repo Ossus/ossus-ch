@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ossus</title>
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="publisher" content="Pascal Pfiffner" />
+	<meta name="author" content="Pascal Pfiffner" />
+	<meta name="robots" content="index,follow" />
+	<meta name="viewport" content="width=800">
+	
+	<link rel="stylesheet" type="text/css" href="static/style.css" />
+	<link rel="icon" href="images/favicon.png" type="image/png" />
+</head>
+<body>
+	<div id="full" onclick="action()" style="background-size:40%;">
+		<ul id="circus" class="hidden">
+			<li data-app="MedCalc"><a href="http://www.medcalc.pro/"><span>MedCalc</span></a></li>
+			<li data-app="MyStudies"><a href="https://www.mystudies.org/"><span>MyStudies</span></a></li>
+			<li data-app="GrowthCharts"><a href="http://p2.github.com/growth-charts/"><span>Growth Charts</span></a></li>
+			<li data-app="About"><a href="about"><span>About Ossus</span></a></li>
+			<li data-app="KidneyCalc"><a href="http://kidneycalc.ossus.ch/"><span>KidneyCalc</span></a></li>
+			<li data-app="MacEponyms"><a href="https://itunes.apple.com/ch/app/eponyms/id420610970?l=en&mt=12"><span>Mac Eponyms</span></a></li>
+			<li data-app="Eponyms"><a href="http://code.hillrippers.ch/eponyms/"><span>Eponyms</span></a></li>
+		</ul>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="static/circle.min.js"></script>
+	<script type="text/javascript">
+	
+	// setup the circus
+	$(document).ready(function() {
+		var kids = $('#circus').children();
+		var step = 360 / kids.length;
+		var retina = ('devicePixelRatio' in window) ? (window.devicePixelRatio > 1.5) : false;
+		
+		kids.each(function(i, item) {
+			var view = $(item);
+			var app = view.data('app');
+			var icon = $('<img/>').attr('src', 'images/' + app + (retina ? '@2x' : '') + '.png').attr('alt', app);
+			view.children().first().prepend(icon);
+			circlePutItemToPositionAtAngle(view, -240 + i * step);
+		});
+	});
+	
+	var _bg_timeout = null;
+	
+	// setup click function
+	function action() {
+		var circus = $('#circus');
+		if (_bg_timeout) {
+			window.clearTimeout(_bg_timeout);
+		}
+		
+		// default vars when hiding the curcus
+		var target_size = 1200;
+		var target_percent = '40%';
+		var percent_timeout = 0;
+		var first_angle = -240;
+		
+		// we are showing the circus
+		if (circus.hasClass('hidden')) {
+			target_size = 300;
+			target_percent = '';
+			percent_timeout = 1000;
+			first_angle = -110;
+		}
+		
+		// show circus
+		var kids = circus.children();
+		var step = 360 / kids.length;
+		
+		circus.children().each(function(i, item) {
+			circleItemTo($(item), first_angle + i * step, circus);
+		});
+		circus.toggleClass('hidden');
+		
+		// set background size - must be set in percent so the CSS animation kicks in
+		var percent_300 = 300 / $(window).width() * 100;
+		$('#full').css('background-size', percent_300 + '%');//.prop('onclick', null);
+		_bg_timeout = window.setTimeout(function() {
+			$('#full').css('background-size', target_percent).css('background-image', 'url(images/Ossus-' + target_size + '.png)');
+		}, percent_timeout);
+	}
+	</script>
+</body>
+</html>

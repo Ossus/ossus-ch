@@ -1,0 +1,62 @@
+/**
+ *  SCSS Mixins
+ */
+
+// Add the same border radius to all corners
+@mixin border-radius-all($radius: 5px) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+	border-radius: $radius;
+}
+
+// Add individual border radii to all corners
+@mixin border-radius($topleft: 5px, $topright: 5px, $bottomright: 5px, $bottomleft: 5px) {
+	-webkit-border-radius: $topleft $topright $bottomright $bottomleft;
+	-moz-border-radius: $topleft $topright $bottomright $bottomleft;
+	-ms-border-radius: $topleft $topright $bottomright $bottomleft;
+	-o-border-radius: $topleft $topright $bottomright $bottomleft;
+	border-radius: $topleft $topright $bottomright $bottomleft;
+}
+
+
+// Adds a transition property
+@mixin transition($property: all, $duration: 0.4s) {
+	-webkit-transition: $property $duration;
+	-moz-transition: $property $duration;
+	-ms-transition: $property $duration;
+	-o-transition: $property $duration;
+	transition: $property $duration;
+}
+
+// A linear gradient, running top down
+@mixin linear-gradient($from: rgb(40,40,40), $to: rgb(25,25,25)) {
+	background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to));								// Safari < 5.0
+	background-image: -webkit-linear-gradient(top, $from, $to);
+	background-image: -moz-linear-gradient(top, $from, $to);
+	background-image: -ms-linear-gradient(top, $from, $to);
+	background-image: -o-linear-gradient(top, $from, $to);
+	background-image: linear-gradient(top, $from, $to);
+}
+
+// A linear gradient, running top down, with the !important flag
+@mixin linear-gradient-important($from: rgb(40,40,40), $to: rgb(25,25,25)) {
+	background-image: -webkit-gradient(linear, left top, left bottom, from($from), to($to)) !important;								// Safari < 5.0
+	background-image: -webkit-linear-gradient(top, $from, $to) !important;
+	background-image: -moz-linear-gradient(top, $from, $to) !important;
+	background-image: -ms-linear-gradient(top, $from, $to) !important;
+	background-image: -o-linear-gradient(top, $from, $to) !important;
+	background-image: linear-gradient(top, $from, $to) !important;
+}
+
+
+// Adds a shadow to a box
+@mixin box-shadow($offset_x: 4px, $blur: 20px, $color: rgba(0,0,0,0.5)) {
+	-webkit-box-shadow: 0 $offset_x $blur $color;
+	-moz-box-shadow: 0 $offset_x $blur $color;
+	-ms-box-shadow: 0 $offset_x $blur $color;
+	-o-box-shadow: 0 $offset_x $blur $color;
+	box-shadow: 0 $offset_x $blur $color;
+}
+
