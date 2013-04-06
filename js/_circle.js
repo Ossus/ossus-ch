@@ -9,9 +9,12 @@
  };
  
  
- function circleItemTo(view, deg, div, delay) {		// view must already be in target div, absolutely positioned
- 	delay = delay ? delay : 0;
- 	deg = deg % 360;
+ /**
+  *  Circles an given item to the given angle, clockwise.
+  *
+  *  @param view The view to circle; must already be in target div, absolutely positioned
+  */
+ function circleItemTo(view, deg, div, delay, duration) {
  	
  	// make sure we have an id
  	var id = view.attr('id');
@@ -27,8 +30,16 @@
 	var b = y - div.innerHeight() / 2;
 	var alpha = Math.atan2(b, a);
 	var radius = Math.ceil(Math.sqrt(a*a + b*b));
+	
+ 	deg = deg % 360;
+ 	if (deg > 180) {
+ 		deg -= 360;
+ 	}
+ 	else if (deg < -180) {
+ 		deg += 360;
+ 	}
 	var target = deg2rad(deg);
-	if (target < alpha) {
+	while (target < alpha) {
 		target += 2 * Math.PI;
 	}
 	// console.log('current:', Math.round(alpha / 0.017453), 'target:', Math.round(target / 0.017453));
@@ -38,7 +49,9 @@
 	
 	// init
 	view.css('position', 'absolute');			// Fix for Safari 5.1
- 	var now = (new Date()).getTime();
+  	delay = delay ? delay : 0;
+	var now = (new Date()).getTime();
+ 	var dur = duration ? duration : _circleState.duration;
 	var state = {
 		'view': view,
 		'width': view.width(),
@@ -54,9 +67,9 @@
 		},
 		'end': {
 			'rad': target,
-			'time': now + delay + _circleState.duration
+			'time': now + delay + dur
 		},
-		'duration': _circleState.duration,
+		'duration': dur,
 		'interval': null
 	};
 	

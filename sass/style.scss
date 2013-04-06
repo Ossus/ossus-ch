@@ -2,13 +2,18 @@
  ***	Ossus.ch
  ***/
 
-@import "mixins";
+@import "bourbon";
 
 
 html, body {
-	width: 100%; height: 100%; margin:0; padding: 0;
+	width: 100%; height: 100%; min-height: 800px; margin:0; padding: 0;
 	font: normal 1em Helvetica-neue, sans-serif; color: black;
 	background-color: white;
+	@include radial-gradient(white, white 50%, rgb(240,240,240) 80%, rgb(200,200,200));
+}
+
+a {
+	text-decoration: none;
 }
 
 
@@ -18,7 +23,8 @@ html, body {
 #full {
 	position: relative; height: 100%;
 	background: url(../images/Ossus-1200.png) center center no-repeat;
-	background-size: 300px; @include transition(background-size, 1s);
+	background-size: 300px; @include transition(background-size 1s);
+	-webkit-tap-highlight-color: transparent;
 }
 
 #container {
@@ -28,23 +34,32 @@ html, body {
 #circus {
 	position: absolute; top: 50%; left: 50%; width: 600px; height: 600px;
 	margin: -300px -300px; padding: 0;
+	opacity: 0;
+	cursor: pointer;
 	text-align: center;
 	@include transition(opacity, 1s);
 	
-	&.hidden {
-		opacity: 0;
-		cursor: pointer;
+	&.shown {
+		opacity: 1;
+		cursor: default;
+		
+		.item:hover {
+			div {
+				display: block;
+			}
+		}
 	}
 	
-	li {
+	.item {
+		display: none;
 		position: absolute; width: 120px; height: 80px;
 		list-style-type: none;
 		text-align: center;
 		// background-color: rgba(0,0,0,0.3);
 		
-		a {
+		> a {
 			color: black; text-decoration: none;
-			line-height: 2.0;
+			@include user-select(none);
 			
 			&:hover {
 				text-shadow: 0 1px 3px rgba(0,0,0,0.8);
@@ -52,13 +67,40 @@ html, body {
 			
 			img {
 				width: 50px; height: 50px;
-				@include border-radius-all(8px);
+				border-radius: 8px;
 			}
 			span {
 				display: block;
+				line-height: 2.0;
+			}
+		}
+		
+		div {
+			display: none;
+			width: 240px; margin-left: -80px; padding: 10px 20px 15px;
+			color: white; text-shadow: 0 -1px 0 black; font-family: "Palatino Linotype", Palatino, "Book Antiqua", Palatino, serif; text-align: left; line-height: 1.4;
+			background: url(../images/crossed_stripes.png) top left repeat rgba(0,0,0,0.5);
+			border: 1px solid rgba(0,0,0,0.8); border-radius: 5px;
+			@include box-shadow(inset 0 1px 10px rgba(0,0,0,0.6), inset 0 1px 3px rgba(0,0,0,1));
+			
+			h2 {
+				font-size: 1.5em; margin: 0 0 0.5em; padding: 0;
+				text-align: center;
+			}
+			a {
+				color: rgb(118,196,64);
+				
+				&:hover {
+					text-shadow: 0 0 4px rgb(118,196,64);
+				}
 			}
 		}
 	}
+}
+
+#circus-logo {
+	position: absolute; top: 253px; left: 150px;
+	width: 300px; height: 94px;
 }
 
 

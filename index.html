@@ -7,81 +7,64 @@
 	<meta name="publisher" content="Pascal Pfiffner" />
 	<meta name="author" content="Pascal Pfiffner" />
 	<meta name="robots" content="index,follow" />
-	<meta name="viewport" content="width=800">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
 	
 	<link rel="stylesheet" type="text/css" href="static/style.css" />
 	<link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
-	<div id="full" onclick="action()" style="background-size:40%;">
-		<ul id="circus" class="hidden">
-			<li data-app="MedCalc"><a href="http://www.medcalc.pro/"><span>MedCalc</span></a></li>
-			<li data-app="MyStudies"><a href="https://www.mystudies.org/"><span>MyStudies</span></a></li>
-			<li data-app="GrowthCharts"><a href="http://p2.github.com/growth-charts/"><span>Growth Charts</span></a></li>
-			<li data-app="About"><a href="about"><span>About Ossus</span></a></li>
-			<li data-app="KidneyCalc"><a href="http://kidneycalc.ossus.ch/"><span>KidneyCalc</span></a></li>
-			<li data-app="MacEponyms"><a href="https://itunes.apple.com/ch/app/eponyms/id420610970?l=en&mt=12"><span>Mac Eponyms</span></a></li>
-			<li data-app="Eponyms"><a href="http://code.hillrippers.ch/eponyms/"><span>Eponyms</span></a></li>
-		</ul>
+	<div id="full" onclick="toggleCircus()" style="background-size:40%;">
+		<div id="circus">
+			<img id="circus-logo" src="" alt="" />
+			<div class="item" data-app="MedCalc"></div>
+			<div class="item" data-app="MyStudies"></div>
+			<div class="item" data-app="GrowthCharts"></div>
+			<div class="item" data-app="About"></div>
+			<div class="item" data-app="KidneyCalc"></div>
+			<div class="item" data-app="MacEponyms"></div>
+			<div class="item" data-app="Eponyms"></div>
+		</div>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="static/circle.min.js"></script>
+	<script src="static/main.min.js"></script>
 	<script type="text/javascript">
+	var _data = {
+		'MedCalc': {
+			'url': "http://www.medcalc.pro/",
+			'desc': "MedCalc is a medical calculator for iOS, built in collaboration with Mathias Tschopp."
+		},
+		'MyStudies': {
+			'url': "https://www.mystudies.org/",
+			'desc': "Clinical study results at your fingertips!"
+		},
+		'GrowthCharts': {
+			'name': "Growth Charts",
+			'url': "http://p2.github.com/growth-charts/index",
+			'desc': "A pediatric growth charts app for iOS, built at Boston Children's Hospital."
+		},
+		'KidneyCalc': {
+			'url': "http://kidneycalc.ossus.ch/",
+			'desc': "An iOS dosage calculator that helps you adjust medication dosages based on renal function. Built in collaboration with James McCormack."
+		},
+		'Eponyms': {
+			'url': "http://code.hillrippers.ch/eponyms/",
+			'desc': "Medical eponyms database, in collaboration with <a href=\"http://eponyms.net\" target=\"_blank\">Andrew J. Yee</a>. Available as iOS and Android app as well as via the web."
+		},
+		'MacEponyms': {
+			'name': "Mac Eponyms",
+			'url': "https://itunes.apple.com/ch/app/eponyms/id420610970?l=en&mt=12",
+			'desc': "The eponyms app for Mac OS X."
+		},
+		'About': {
+			'name': "About Ossus",
+			'url': "about"
+		}
+	}
 	
 	// setup the circus
 	$(document).ready(function() {
-		var kids = $('#circus').children();
-		var step = 360 / kids.length;
-		var retina = ('devicePixelRatio' in window) ? (window.devicePixelRatio > 1.5) : false;
-		
-		kids.each(function(i, item) {
-			var view = $(item);
-			var app = view.data('app');
-			var icon = $('<img/>').attr('src', 'images/' + app + (retina ? '@2x' : '') + '.png').attr('alt', app);
-			view.children().first().prepend(icon);
-			circlePutItemToPositionAtAngle(view, -240 + i * step);
-		});
+		setupCircus();
 	});
-	
-	var _bg_timeout = null;
-	
-	// setup click function
-	function action() {
-		var circus = $('#circus');
-		if (_bg_timeout) {
-			window.clearTimeout(_bg_timeout);
-		}
-		
-		// default vars when hiding the curcus
-		var target_size = 1200;
-		var target_percent = '40%';
-		var percent_timeout = 0;
-		var first_angle = -240;
-		
-		// we are showing the circus
-		if (circus.hasClass('hidden')) {
-			target_size = 300;
-			target_percent = '';
-			percent_timeout = 1000;
-			first_angle = -110;
-		}
-		
-		// show circus
-		var kids = circus.children();
-		var step = 360 / kids.length;
-		
-		circus.children().each(function(i, item) {
-			circleItemTo($(item), first_angle + i * step, circus);
-		});
-		circus.toggleClass('hidden');
-		
-		// set background size - must be set in percent so the CSS animation kicks in
-		var percent_300 = 300 / $(window).width() * 100;
-		$('#full').css('background-size', percent_300 + '%');//.prop('onclick', null);
-		_bg_timeout = window.setTimeout(function() {
-			$('#full').css('background-size', target_percent).css('background-image', 'url(images/Ossus-' + target_size + '.png)');
-		}, percent_timeout);
-	}
 	</script>
 </body>
 </html>
