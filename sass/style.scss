@@ -4,12 +4,26 @@
 
 @import "bourbon";
 
+$tablet-width:			460px;
+$desktop-width:			980px;
+
 
 html, body {
-	width: 100%; height: 100%; min-height: 800px; margin:0; padding: 0;
-	font: normal 1em Helvetica-neue, sans-serif; color: black;
+	width: 100%; height: 100%;
+	margin: 0; padding: 0;
+}
+
+body {
+	@media screen and (min-width: $desktop-width) {
+		min-height: 800px;
+	}
+	
+	font-family: "Helvetica-Neue", Helvetica, sans-serif; font-size: 1em; font-weight: 300; color: black; line-height: 1.6;
 	background-color: white;
-	@include radial-gradient(white, white 50%, rgb(240,240,240) 80%, rgb(200,200,200));
+}
+
+h1, h2, h3, h4 {
+	font-weight: 500;
 }
 
 a {
@@ -21,25 +35,91 @@ a {
  * Layout
  */
 #full {
-	position: relative; height: 100%;
-	background: url(../images/Ossus-1200.png) center center no-repeat;
-	background-size: 300px; @include transition(background-size 1s);
+	position: relative;
+	min-height: 100%;
+	padding: 0 20px;
+	
+	@media screen and (min-width: $desktop-width) {
+		background: url(../images/Ossus-1200.png) center center no-repeat;
+		background-size: 40%; @include transition(background-size 1s);
+	}
+	
 	-webkit-tap-highlight-color: transparent;
+	@include radial-gradient(white, white 50%, rgb(240,240,240) 80%, rgb(200,200,200));
+	
+	h1 {
+		margin-top: 0; padding-top: 1em;
+	}
 }
 
-#container {
-	padding: 4em;
+#circus-logo-190, #circus-logo-300 {
+	display: none; position: absolute; top: 50%; left: 50%;
+	
+	#full.shown & {
+		position: relative; top: 40px;
+		margin-top: 0;
+	}
+	
+	@include transition(top 1s);
+	@include user-select(none);
+}
+
+#circus-logo-190 {
+	width: 190px; height: 66px;
+	margin: -23px 0 0 -95px;
+	
+	@media screen and (max-width: $tablet-width) {
+		display: block;
+		
+		@media screen and (-webkit-max-device-pixel-ratio: 1.5) {
+			background: url(../images/Ossus-190.png) center center no-repeat;
+		}
+		@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+			background: url(../images/Ossus-190@2x.png) center center no-repeat;
+		}
+	}
+}
+
+#circus-logo-300 {
+	width: 300px; height: 94px;
+	margin: -47px -150px;
+	
+	@media screen and (min-width: $tablet-width) and (max-width: $desktop-width) {
+		display: block;
+		
+		@media screen and (-webkit-max-device-pixel-ratio: 1.5) {
+			background: url(../images/Ossus-300.png) center center no-repeat;
+		}
+		@media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+			background: url(../images/Ossus-300@2x.png) center center no-repeat;
+		}
+	}
+}
+
+#circus-wrap {
+	display: none;
+	margin: 0; padding: 80px 20px 20px;
+	text-align: center;
+	
+	@media screen and (min-width: $tablet-width) {
+		padding-top: 120px;
+	}
 }
 
 #circus {
-	position: absolute; top: 50%; left: 50%; width: 600px; height: 600px;
-	margin: -300px -300px; padding: 0;
-	opacity: 0;
+	display: inline-block;
+	margin: 0; padding: 0;
+	opacity: 0; @include transition(opacity, 1s);
 	cursor: pointer;
-	text-align: center;
-	@include transition(opacity, 1s);
+	list-style-type: none;
 	
-	&.shown {
+	@media screen and (min-width: $desktop-width) {
+		position: absolute; top: 50%; left: 50%; width: 600px; height: 600px;
+		margin: -300px -300px;
+		text-align: center;
+	}
+	
+	#full.shown & {
 		opacity: 1;
 		cursor: default;
 		
@@ -50,14 +130,20 @@ a {
 		}
 	}
 	
-	.item {
-		display: none;
-		position: absolute; width: 120px; height: 80px;
-		list-style-type: none;
-		text-align: center;
-		// background-color: rgba(0,0,0,0.3);
+	li {
+		margin-top: 1.2em;
+		font-size: 1.1em; text-align: left;
 		
-		> a {
+		@media screen and (min-width: $tablet-width) {
+			font-size: 1.3em;
+		}
+		
+		@media screen and (min-width: $desktop-width) {
+			position: absolute; width: 160px; height: 80px;
+			text-align: center;
+		}
+		
+		& > a {
 			color: black; text-decoration: none;
 			@include user-select(none);
 			
@@ -66,12 +152,25 @@ a {
 			}
 			
 			img {
-				width: 50px; height: 50px;
-				border-radius: 8px;
+				width: 25px; height: 25px;
+				margin-right: 0.8em;
+				border-radius: 4px;
+				vertical-align: -20%;
+				
+				@media screen and (min-width: $tablet-width) {
+					width: 50px; height: 50px;
+					border-radius: 8px;
+					vertical-align: -50%;
+				}
+				@media screen and (min-width: $desktop-width) {
+					margin-right: 0;
+				}
 			}
 			span {
-				display: block;
-				line-height: 2.0;
+				@media screen and (min-width: $desktop-width) {
+					display: block;
+					margin-top: 0.5em;
+				}
 			}
 		}
 		
@@ -79,7 +178,7 @@ a {
 			display: none;
 			width: 240px; margin-left: -80px; padding: 10px 20px 15px;
 			color: white; text-shadow: 0 -1px 0 black; font-family: "Palatino Linotype", Palatino, "Book Antiqua", Palatino, serif; text-align: left; line-height: 1.4;
-			background: url(../images/crossed_stripes.png) top left repeat rgba(0,0,0,0.5);
+			background-color: rgba(0,0,0,0.8);
 			border: 1px solid rgba(0,0,0,0.8); border-radius: 5px;
 			@include box-shadow(inset 0 1px 10px rgba(0,0,0,0.6), inset 0 1px 3px rgba(0,0,0,1));
 			
@@ -96,11 +195,6 @@ a {
 			}
 		}
 	}
-}
-
-#circus-logo {
-	position: absolute; top: 253px; left: 150px;
-	width: 300px; height: 94px;
 }
 
 

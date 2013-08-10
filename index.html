@@ -13,16 +13,11 @@
 	<link rel="icon" href="images/favicon.png" type="image/png" />
 </head>
 <body>
-	<div id="full" onclick="toggleCircus()" style="background-size:40%;">
-		<div id="circus">
-			<img id="circus-logo" src="" alt="" />
-			<div class="item" data-app="MedCalc"></div>
-			<div class="item" data-app="MyStudies"></div>
-			<div class="item" data-app="GrowthCharts"></div>
-			<div class="item" data-app="About"></div>
-			<div class="item" data-app="KidneyCalc"></div>
-			<div class="item" data-app="MacEponyms"></div>
-			<div class="item" data-app="Eponyms"></div>
+	<div id="full" onclick="toggleCircus()">
+		<div id="circus-logo-190"></div>
+		<div id="circus-logo-300"></div>
+		<div id="circus-wrap">
+			<ul id="circus"></ul>
 		</div>
 	</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -42,13 +37,13 @@
 			'url': "http://p2.github.com/growth-charts/index",
 			'desc': "A pediatric growth charts app for iOS, built at Boston Children's Hospital."
 		},
-		'KidneyCalc': {
-			'url': "http://kidneycalc.ossus.ch/",
-			'desc': "An iOS dosage calculator that helps you adjust medication dosages based on renal function. Built in collaboration with James McCormack."
-		},
 		'Eponyms': {
 			'url': "http://code.hillrippers.ch/eponyms/",
 			'desc': "Medical eponyms database, in collaboration with <a href=\"http://eponyms.net\" target=\"_blank\">Andrew J. Yee</a>. Available as iOS and Android app as well as via the web."
+		},
+		'KidneyCalc': {
+			'url': "http://kidneycalc.ossus.ch/",
+			'desc': "An iOS dosage calculator that helps you adjust medication dosages based on renal function. Built in collaboration with James McCormack."
 		},
 		'MacEponyms': {
 			'name': "Mac Eponyms",

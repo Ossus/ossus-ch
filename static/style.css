@@ -1,24 +1,48 @@
 /*** **	Ossus.ch **/
-html, body { width: 100%; height: 100%; min-height: 800px; margin: 0; padding: 0; font: normal 1em Helvetica-neue, sans-serif; color: black; background-color: white; background-color: white; background-image: -webkit-gradient(radial, center center, 0, center center, 460, color-stop(0%, white), color-stop(50%, white), color-stop(80%, #f0f0f0), color-stop(100%, #c8c8c8)); background-image: -webkit-radial-gradient(50% 50%, ellipse cover, white, white 50%, #f0f0f0 80%, #c8c8c8); background-image: -moz-radial-gradient(50% 50%, ellipse cover, white, white 50%, #f0f0f0 80%, #c8c8c8); background-image: -ms-radial-gradient(50% 50%, ellipse cover, white, white 50%, #f0f0f0 80%, #c8c8c8); background-image: -o-radial-gradient(50% 50%, ellipse cover, white, white 50%, #f0f0f0 80%, #c8c8c8); background-image: radial-gradient(50% 50%, ellipse cover, white, white 50%, #f0f0f0 80%, #c8c8c8); }
+html, body { width: 100%; height: 100%; margin: 0; padding: 0; }
+
+body { font-family: "Helvetica-Neue", Helvetica, sans-serif; font-size: 1em; font-weight: 300; color: black; line-height: 1.6; background-color: white; }
+@media screen and (min-width: 980px) { body { min-height: 800px; } }
+
+h1, h2, h3, h4 { font-weight: 500; }
 
 a { text-decoration: none; }
 
 /** Layout */
-#full { position: relative; height: 100%; background: url(../images/Ossus-1200.png) center center no-repeat; background-size: 300px; -webkit-transition: background-size 1s; -moz-transition: background-size 1s; -ms-transition: background-size 1s; -o-transition: background-size 1s; transition: background-size 1s; -webkit-tap-highlight-color: transparent; }
+#full { position: relative; min-height: 100%; padding: 0 20px; -webkit-tap-highlight-color: transparent; background-color: white; background-image: -webkit-gradient(radial, center center, 0, center center, 460, color-stop(0%, white), color-stop(50%, white), color-stop(80%, #f0f0f0), color-stop(100%, #c8c8c8)); background-image: -webkit-radial-gradient(white, white 50%, #f0f0f0 80%, #c8c8c8); background-image: radial-gradient(  white, white 50%, #f0f0f0 80%, #c8c8c8); }
+@media screen and (min-width: 980px) { #full { background: url(../images/Ossus-1200.png) center center no-repeat; background-size: 40%; -webkit-transition: background-size 1s; -moz-transition: background-size 1s; transition: background-size 1s; } }
+#full h1 { margin-top: 0; padding-top: 1em; }
 
-#container { padding: 4em; }
+#circus-logo-190, #circus-logo-300 { display: none; position: absolute; top: 50%; left: 50%; -webkit-transition: top 1s; -moz-transition: top 1s; transition: top 1s; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+#full.shown #circus-logo-190, #full.shown #circus-logo-300 { position: relative; top: 40px; margin-top: 0; }
 
-#circus { position: absolute; top: 50%; left: 50%; width: 600px; height: 600px; margin: -300px -300px; padding: 0; opacity: 0; cursor: pointer; text-align: center; -webkit-transition: opacity, 1s; -moz-transition: opacity, 1s; -ms-transition: opacity, 1s; -o-transition: opacity, 1s; transition: opacity, 1s; }
-#circus.shown { opacity: 1; cursor: default; }
-#circus.shown .item:hover div { display: block; }
-#circus .item { display: none; position: absolute; width: 120px; height: 80px; list-style-type: none; text-align: center; }
-#circus .item > a { color: black; text-decoration: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-#circus .item > a:hover { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); }
-#circus .item > a img { width: 50px; height: 50px; border-radius: 8px; }
-#circus .item > a span { display: block; line-height: 2.0; }
-#circus .item div { display: none; width: 240px; margin-left: -80px; padding: 10px 20px 15px; color: white; text-shadow: 0 -1px 0 black; font-family: "Palatino Linotype", Palatino, "Book Antiqua", Palatino, serif; text-align: left; line-height: 1.4; background: url(../images/crossed_stripes.png) top left repeat rgba(0, 0, 0, 0.5); border: 1px solid rgba(0, 0, 0, 0.8); border-radius: 5px; box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.6), inset 0 1px 3px black; }
-#circus .item div h2 { font-size: 1.5em; margin: 0 0 0.5em; padding: 0; text-align: center; }
-#circus .item div a { color: #76c440; }
-#circus .item div a:hover { text-shadow: 0 0 4px #76c440; }
+#circus-logo-190 { width: 190px; height: 66px; margin: -23px 0 0 -95px; }
+@media screen and (max-width: 460px) { #circus-logo-190 { display: block; } }
+@media screen and (max-width: 460px) and (-webkit-max-device-pixel-ratio: 1.5) { #circus-logo-190 { background: url(../images/Ossus-190.png) center center no-repeat; } }
+@media screen and (max-width: 460px) and (-webkit-min-device-pixel-ratio: 1.5) { #circus-logo-190 { background: url(../images/Ossus-190@2x.png) center center no-repeat; } }
 
-#circus-logo { position: absolute; top: 253px; left: 150px; width: 300px; height: 94px; }
+#circus-logo-300 { width: 300px; height: 94px; margin: -47px -150px; }
+@media screen and (min-width: 460px) and (max-width: 980px) { #circus-logo-300 { display: block; } }
+@media screen and (min-width: 460px) and (max-width: 980px) and (-webkit-max-device-pixel-ratio: 1.5) { #circus-logo-300 { background: url(../images/Ossus-300.png) center center no-repeat; } }
+@media screen and (min-width: 460px) and (max-width: 980px) and (-webkit-min-device-pixel-ratio: 1.5) { #circus-logo-300 { background: url(../images/Ossus-300@2x.png) center center no-repeat; } }
+
+#circus-wrap { display: none; margin: 0; padding: 80px 20px 20px; text-align: center; }
+@media screen and (min-width: 460px) { #circus-wrap { padding-top: 120px; } }
+
+#circus { display: inline-block; margin: 0; padding: 0; opacity: 0; -webkit-transition: opacity, 1s; -moz-transition: opacity, 1s; transition: opacity, 1s; cursor: pointer; list-style-type: none; }
+@media screen and (min-width: 980px) { #circus { position: absolute; top: 50%; left: 50%; width: 600px; height: 600px; margin: -300px -300px; text-align: center; } }
+#full.shown #circus { opacity: 1; cursor: default; }
+#full.shown #circus .item:hover div { display: block; }
+#circus li { margin-top: 1.2em; font-size: 1.1em; text-align: left; }
+@media screen and (min-width: 460px) { #circus li { font-size: 1.3em; } }
+@media screen and (min-width: 980px) { #circus li { position: absolute; width: 160px; height: 80px; text-align: center; } }
+#circus li > a { color: black; text-decoration: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+#circus li > a:hover { text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8); }
+#circus li > a img { width: 25px; height: 25px; margin-right: 0.8em; border-radius: 4px; vertical-align: -20%; }
+@media screen and (min-width: 460px) { #circus li > a img { width: 50px; height: 50px; border-radius: 8px; vertical-align: -50%; } }
+@media screen and (min-width: 980px) { #circus li > a img { margin-right: 0; } }
+@media screen and (min-width: 980px) { #circus li > a span { display: block; margin-top: 0.5em; } }
+#circus li div { display: none; width: 240px; margin-left: -80px; padding: 10px 20px 15px; color: white; text-shadow: 0 -1px 0 black; font-family: "Palatino Linotype", Palatino, "Book Antiqua", Palatino, serif; text-align: left; line-height: 1.4; background-color: rgba(0, 0, 0, 0.8); border: 1px solid rgba(0, 0, 0, 0.8); border-radius: 5px; box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.6), inset 0 1px 3px black; }
+#circus li div h2 { font-size: 1.5em; margin: 0 0 0.5em; padding: 0; text-align: center; }
+#circus li div a { color: #76c440; }
+#circus li div a:hover { text-shadow: 0 0 4px #76c440; }
