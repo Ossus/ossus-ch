@@ -19,7 +19,9 @@ function setupCircus() {
 		// icon & link
 		var url = 'url' in app ? app['url'] : '';
 		var link = $('<a/>').attr('href', url);
-		var icon = $('<img/>').attr('src', 'images/' + p + (onRetinaScreen() ? '@2x' : '') + '.png').attr('alt', p);
+		var icon = $('<img/>').attr('src', 'images/' + p + '.png')
+			.attr('srcset', 'images/' + p + '@2x.png 2x')
+			.attr('alt', p);
 		var span = $('<span/>').text(app_name);
 		link.append(icon).append(span);
 		li.append(link);
@@ -27,16 +29,26 @@ function setupCircus() {
 			e.stopPropagation();
 			return true;
 		});
-		
+			
 		// hover
 		var desc = 'desc' in app ? app['desc'] : null;
 		if (desc) {
-			var hover = $('<div/>').html('<h2>' + app_name + '</h2>' + desc);
-			hover.click(function(e) {
-				e.stopPropagation();
-				e.preventDefault();
-			});
-			li.append(hover);
+			li.on('mouseover', function(id, name, desc) {
+				return function(e) {
+					if ($('#' + id).is('*')) {
+						return;
+					}
+					var hover = $('<div/>', {'id': id}).addClass('detail')
+						.html('<h1>' + name + '</h1>' + desc);
+					$('#full').addClass('blank').append(hover);
+				}
+			}(p, app_name, desc));
+			li.on('mouseout', function(id) {
+				return function(e) {
+					$('#' + id).remove();
+					$('#full').removeClass('blank');
+				}
+			}(p));
 		}
 		
 		// position
@@ -101,24 +113,13 @@ function toggleCircus() {
 
 function showCircusOnPhones() {
 	$('#circus-wrap').show();
-	
-	window.setTimeout(function() {
-		$('#full').addClass('shown');
-	}, 10);
+	$('#full').addClass('shown');
 }
 
 function hideCircusOnPhones() {
 	$('#full').removeClass('shown');
-	
 	window.setTimeout(function() {
 		$('#circus-wrap').hide();
 	}, 1000);
 }
 
-
-/**
- *  Returns true on a retina device.
- */
-function onRetinaScreen() {
-	return ('devicePixelRatio' in window) ? (window.devicePixelRatio > 1.5) : false;
-}
