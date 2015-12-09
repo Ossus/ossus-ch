@@ -4,8 +4,10 @@
 
 @import "bourbon";
 
-$tablet-width:			460px;
-$desktop-width:			980px;
+$tablet-width:    460px;
+$desktop-width:   980px;
+$circle-radius:   560px;
+$content-width:   28em;
 
 
 html, body {
@@ -14,11 +16,8 @@ html, body {
 }
 
 body {
-	@media screen and (min-width: $desktop-width) {
-		min-height: 800px;
-	}
-	
-	font-family: -apple-system, "Helvetica-Neue", Helvetica, Roboto, sans-serif; font-size: 1em; font-weight: 300; color: black; line-height: 1.6;
+	font-family: -apple-system, "Helvetica-Neue", Helvetica, Roboto, sans-serif; font-size: 1em; font-weight: 300;
+	color: black; line-height: 1.6;
 	background-color: white;
 }
 
@@ -37,7 +36,7 @@ a {
 #full {
 	position: relative;
 	min-height: 100%;
-	padding: 0 20px;
+	padding: 0;
 	
 	@media screen and (min-width: $desktop-width) {
 		background: url(../images/Ossus-1200.png) center center no-repeat;
@@ -49,11 +48,19 @@ a {
 	}
 	
 	-webkit-tap-highlight-color: transparent;
-	@include radial-gradient(white, white 50%, rgb(240,240,240) 80%, rgb(230,230,230));
-	
-	h1 {
-		margin-top: 0; padding-top: 1em;
-	}
+	@include radial-gradient(white, white 50%, rgb(255,255,255) 80%, rgb(250,250,250));
+}
+
+#container {
+	padding: 20px 15px;
+	@media screen and (min-width: $desktop-width) {
+		padding: 2em;
+	}	
+}
+
+#content {
+	max-width: $content-width;
+	margin: 0 auto;
 }
 
 #circus-logo-190, #circus-logo-300 {
@@ -64,10 +71,10 @@ a {
 
 #circus-logo-190 {
 	width: 190px; height: 66px;
-	margin: -23px 0 0 -95px;
+	margin: -33px 0 0 -95px;
 	
 	#full.shown & {
-		top: 40px + 23px;
+		top: 40px + 33px;
 	}
 	
 	@media screen and (max-width: $tablet-width) {
@@ -122,8 +129,8 @@ a {
 	list-style-type: none;
 	
 	@media screen and (min-width: $desktop-width) {
-		position: absolute; top: 50%; left: 50%; width: 600px; height: 600px;
-		margin: -300px -300px;
+		position: absolute; top: 50%; left: 50%; width: $circle-radius; height: $circle-radius;
+		margin: ($circle-radius / -2) ($circle-radius / -2);
 		text-align: center;
 	}
 	
